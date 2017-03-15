@@ -1,6 +1,6 @@
 # Staff-directory
 
-This is a fork of the excellent WordPress plugin [https://wordpress.org/plugins/staff-directory/](Staff Directory). Please don't use this fork unless you know what you're doing.
+This is a fork of the excellent WordPress plugin [Staff Directory](https://wordpress.org/plugins/staff-directory/). Please don't use this fork unless you know what you're doing.
 
 ## Plugin Features
 

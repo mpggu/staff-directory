@@ -157,6 +157,7 @@ class Staff_Directory_Shortcode {
             'cat'      => '',
             'cat_field' => 'ID',
             'cat_relation' => 'OR',
+            'aufgabe' => '',
             'orderby'  => 'ID',
             'order'    => 'DESC',
             'meta_key' => '',
@@ -209,6 +210,13 @@ class Staff_Directory_Shortcode {
 
             $query_args['tax_query'] = $cats_query;
 		}
+
+        // check if we're returning a staff category (aufgabe)
+        if ( ( isset( $params['aufgabe'] ) && $params['aufgabe'] != '') && ( ! isset( $params['id'] ) || $params['id'] == '' ) ) {
+            $query_args['meta_key'] = 'aufgabe';
+            $query_args['meta_value'] =  $params['aufgabe'];
+            $query_args['meta_compare'] = 'IN';
+        }
 
 		if ( isset( $params['orderby'] ) && $params['orderby'] != '' ) {
 			$query_args['orderby'] = $params['orderby'];

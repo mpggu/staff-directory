@@ -1,6 +1,8 @@
-This repo is meant to serve as a mirror to the [Staff Directory](https://wordpress.org/plugins/staff-directory/) plugin hosted on Wordpress.org. This repo will be updated to reflect the svn repo and will be open to pull requests should anyone like to submit one.
+# Staff-directory
 
-### Plugin Features
+This is a fork of the excellent WordPress plugin [https://wordpress.org/plugins/staff-directory/](Staff Directory). Please don't use this fork unless you know what you're doing.
+
+## Plugin Features
 
 - [staff-directory] shortcode with options for ordering, categories, etc
 - Staff categories

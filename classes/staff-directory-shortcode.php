@@ -126,30 +126,27 @@ class Staff_Directory_Shortcode {
     static function category_shortcode($atts){
         $atts = shortcode_atts( array(
             'all' => false,
-            'filter' => ''
+            'aufgaben' => false,
         ), $atts);
         $staff_categories     = wp_get_post_terms( get_the_ID(), 'staff_category' );
+        $output_aufgaben = $atts['aufgaben'] === "true" || $atts['aufgaben'] === true;
         $all_staff_categories = "";
-        $cats_to_filter_by = explode( ',', $atts['filter'] );
 
         if ( count( $staff_categories ) > 0 ) {
             $staff_category = $staff_categories[0]->name;
             foreach ( $staff_categories as $category ) {
-                if ( count ( $cats_to_filter_by > 0) ) {
-                    if ( in_array ( $category->name, $cats_to_filter_by ) ) {
-                        $all_staff_categories .= $category->name . ", ";
-                    }
-                } else {
+                if ( $output_aufgaben && $category->parent !== 47) {
+                    $all_staff_categories .= $category->name . ", ";
+                } else if ( !$output_aufgaben && $category->parent === 47) {
                     $all_staff_categories .= $category->name . ", ";
                 }
-
             }
             $all_staff_categories = substr( $all_staff_categories, 0, strlen( $all_staff_categories ) - 2 );
         } else {
             $staff_category = "";
         }
 
-        if( $atts['all'] === "true" || $atts['all'] === true || $atts['filter'] !== '') {
+        if( $atts['all'] === "true" || $atts['all'] === true) {
             return $all_staff_categories;
         } else {
             return $staff_category;

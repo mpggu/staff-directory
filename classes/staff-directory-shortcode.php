@@ -225,7 +225,7 @@ class Staff_Directory_Shortcode {
                 $aufgaben_query[] = array(
                     'key' => 'aufgabe',
                     'value' => $aufgabe,
-                    'compare' => 'IN'
+                    'compare' => 'LIKE'
                 );
             }
             

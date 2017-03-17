@@ -213,9 +213,24 @@ class Staff_Directory_Shortcode {
 
         // check if we're returning a staff category (aufgabe)
         if ( ( isset( $params['aufgabe'] ) && $params['aufgabe'] != '') && ( ! isset( $params['id'] ) || $params['id'] == '' ) ) {
-            $query_args['meta_key'] = 'aufgabe';
-            $query_args['meta_value'] =  $params['aufgabe'];
-            $query_args['meta_compare'] = 'IN';
+            $aufgaben_query = array();
+
+            $aufgaben = explode( ',', $params['aufgabe'] );
+
+            if (count($aufgaben) > 1) {
+                $aufgaben_query['relation'] = $params['cat_relation'];
+            }
+
+            foreach ($aufgaben as $aufgabe) {
+                $aufgaben_query[] = array(
+                    'key' => 'aufgabe',
+                    'value' => $aufgabe,
+                    'compare' => 'IN'
+                );
+            }
+            
+
+            $query_args['meta_query'] = $aufgaben_query;
         }
 
 		if ( isset( $params['orderby'] ) && $params['orderby'] != '' ) {

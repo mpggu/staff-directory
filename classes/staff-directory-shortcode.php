@@ -126,21 +126,30 @@ class Staff_Directory_Shortcode {
     static function category_shortcode($atts){
         $atts = shortcode_atts( array(
             'all' => false,
+            'filter' => ''
         ), $atts);
         $staff_categories     = wp_get_post_terms( get_the_ID(), 'staff_category' );
         $all_staff_categories = "";
+        $cats_to_filter_by = explode( ',', $atts['filter'] );
 
         if ( count( $staff_categories ) > 0 ) {
             $staff_category = $staff_categories[0]->name;
             foreach ( $staff_categories as $category ) {
-                $all_staff_categories .= $category->name . ", ";
+                if ( count ( $cats_to_filter_by > 0) ) {
+                    if ( in_array ( $category->name, $cats_to_filter_by ) ) {
+                        $all_staff_categories .= $category->name . ", ";
+                    }
+                } else {
+                    $all_staff_categories .= $category->name . ", ";
+                }
+
             }
             $all_staff_categories = substr( $all_staff_categories, 0, strlen( $all_staff_categories ) - 2 );
         } else {
             $staff_category = "";
         }
 
-        if( $atts['all'] === "true" || $atts['all'] === true ) {
+        if( $atts['all'] === "true" || $atts['all'] === true || $atts['filter'] !== '') {
             return $all_staff_categories;
         } else {
             return $staff_category;

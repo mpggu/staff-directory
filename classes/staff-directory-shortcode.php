@@ -21,7 +21,8 @@ class Staff_Directory_Shortcode {
             'bio',
             'bio_paragraph',
             'profile_link',
-            'category'
+            'category',
+            'first_name'
         );
 
         //Add shortcodes for all $predefined_shortcodes, link to function by
@@ -52,6 +53,14 @@ class Staff_Directory_Shortcode {
             return ""; //print nothing and remove tag if no value
         }
 
+    }
+
+    static function first_name_shortcode( $atts, $content = NULL, $tag) {
+        $email = get_post_meta( get_the_ID(), 'email', true );
+        if($email) {
+          return $email[0];
+        }
+        return "";
     }
 
     static function staff_loop_shortcode( $atts, $content = NULL ) {
@@ -234,7 +243,7 @@ class Staff_Directory_Shortcode {
                     'compare' => 'LIKE'
                 );
             }
-            
+
 
             $query_args['meta_query'] = $aufgaben_query;
         }
